@@ -1,0 +1,95 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    bean for person using setter injection-->
+    <bean id="person" class="com.surya.Person">
+        <property name="name" value="Surya"/>
+        <property name="id" value="1"/>
+        <property name="age" value="21"/>
+        <property name="phNo" value="1234567890"/>
+    </bean>
+
+    <bean id="person2" class="com.surya.Person">
+        <property name="name" value="Lokesh"/>
+        <property name="id" value="2"/>
+        <property name="age" value="21"/>
+        <property name="phNo" value="1234567890"/>
+    </bean>
+
+<!--    bean for Person using constructor injection-->
+    <bean id="person3" class="com.surya.Person">
+        <constructor-arg  index="0" value="Sasanth"/>
+        <constructor-arg index="1"  value="3"/>
+        <constructor-arg index="2"  value="21"/>
+        <constructor-arg index="3"  value="1234567890"/>
+    </bean>
+
+
+<!--   bean for School using setter injection -->
+<!--  for list(String),list(Objects),map-->
+    <bean id="school1" class="com.surya.School">
+            <!--list creation-->
+        <property name="teachers">
+            <list>
+                <value>teacher1</value>
+                <value>teacher2</value>
+                <value>teacher3</value>
+            </list>
+        </property>
+            <!--list of objects-->
+        <property name="persons">
+            <list>
+                <ref bean="person"/>
+                <ref bean="person2"/>
+            </list>
+        </property>
+            <!--map-->
+        <property name="map">
+            <map>
+                <entry key="phone" value="redmi"/>
+                <entry key="lap" value="hp"/>
+            </map>
+        </property>
+    </bean>
+
+    <!--   bean for School using constructor injection -->
+    <!--  for list(String),list(Objects),map-->
+    <bean id="school2" class="com.surya.School">
+            <!-- list -->
+        <constructor-arg index="0">
+            <list>
+                <value>teacher4</value>
+                <value>teacher5</value>
+                <value>teacher6</value>
+            </list>
+        </constructor-arg>
+        <!--list of objects-->
+        <constructor-arg index="1">
+            <list>
+                <ref bean="person2"/>
+                <ref bean="person3"/>
+            </list>
+        </constructor-arg>
+
+        <constructor-arg index="2">
+            <map>
+                <entry key="phone" value="samsung"/>
+                <entry key="lap" value="Dell"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+
+    <!-- Here Laptop is autowired byName   -->
+   <bean id="dev" class="com.surya.Developer" autowire="byType">
+   </bean>
+
+    <bean id="com" class="com.surya.Laptop">
+    </bean>
+
+    <bean id="com2" class="com.surya.Desktop" primary="true">
+    </bean>
+
+</beans>
